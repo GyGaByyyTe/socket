@@ -6,12 +6,21 @@
 </head>
 
 <body>
-  <h1>Express</h1>
-  <p>Welcome to Express</p>
+<h1>Express</h1>
+<p>Welcome to Express</p>
 </body>
 <script src="/socket.io/socket.io.js"></script>
 <script>
   var socket = io();
+  // fetch("/users", {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  //   body: JSON.stringify({ name: 'test222', email: "test@22example.com" })
+  // })
+  setTimeout(() => socket.emit('create', JSON.stringify({ name: "test3", email: "test13@test.ru" })), 1000);
+
 </script>
 
 </html>

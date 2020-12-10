@@ -27,15 +27,20 @@ const getUserById = (request, response) => {
   })
 }
 
-const createUser = (request, response) => {
+const createUser = async (request, response) => {
   const { name, email } = request.body
-
-  pool.query('INSERT INTO users (name, email) VALUES ($1, $2)', [name, email], (error, results) => {
-    if (error) {
-      throw error
-    }
-    response.status(201).send(`User added with ID: ${result.insertId}`)
-  })
+  // pool.query('INSERT INTO users (name, email) VALUES ($1, $2) RETURNING *', [name, email], (error, result) => {
+  //   if (error) {
+  //     throw error
+  //   }
+  //   // x = result.insertId;
+  //   console.log(result.rows[0].id);
+  //   return result.rows[0].id;
+  //   // response.status(201).send(`User added with ID: ${result.rows[0].id}`)
+  // })
+  return await pool.query('INSERT INTO users (name, email) VALUES ($1, $2) RETURNING *', [name, email])
+      .then(res => res.rows[0].id)
+      .catch(err => console.error('Error executing query', err.stack))
 }
 
 const updateUser = (request, response) => {

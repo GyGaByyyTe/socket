@@ -13,6 +13,7 @@ router.get('/:id', function (req, res) {
   db.getUserById(req, res);
 })
 router.post('/', function (req, res) {
+  console.log(req.body);
   db.createUser(req, res);
 })
 router.put('/:id', function (req, res) {
